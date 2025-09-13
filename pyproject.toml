@@ -1,0 +1,65 @@
+[project]
+name = "quorabroker"
+version = "0.1.0"
+description = "Kafka topic subscriber service that consumes URL tasks and performs web fetch operations"
+readme = "README.md"
+requires-python = "==3.13.*"
+dependencies = [
+	"aiokafka>=0.10.0",
+	"motor>=3.6.0",
+	"httpx>=0.27.0",
+	"pydantic>=2.7.0",
+	"structlog>=24.1.0",
+	"orjson>=3.10.0",
+	"python-dotenv>=1.0.0"
+	,"selenium>=4.21.0"
+	,"webdriver-manager>=4.0.1"
+]
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+# Placeholder for future uv-specific configuration (indexes, settings, etc.)
+
+[project.optional-dependencies]
+dev = [
+		"ruff>=0.5.0",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+indent-width = 4
+respect-gitignore = true
+src = ["src", "."]
+
+[tool.ruff.lint]
+select = [
+	# Core
+	"E", "F", "I",  # pycodestyle, pyflakes, import sorting
+	# Best practices & correctness
+	"B",              # flake8-bugbear
+	"ASYNC",          # async issues
+	# Security (lightweight subset)
+	"S",              # bandit
+	# Performance
+	"PERF",
+	# Comprehensions
+	"C4",
+	# Pydantic
+	"Pydantic",
+]
+ignore = [
+	"E203",  # whitespace before : (Black compatibility if adopted later)
+	"E501",  # line length (handled by formatter; soft-limit still documented)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+docstring-code-format = true
+docstring-code-line-length = 100

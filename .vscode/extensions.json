@@ -1,0 +1,7 @@
+{
+  // VS Code workspace extension recommendations
+  "recommendations": [
+    "astral-sh.ruff"
+  ],
+  "unwantedRecommendations": []
+}
