@@ -3,7 +3,7 @@ name = "quorabroker"
 version = "0.1.0"
 description = "Kafka topic subscriber service that consumes URL tasks and performs web fetch operations"
 readme = "README.md"
-requires-python = "==3.13.*"
+requires-python = "==3.13.7"
 dependencies = [
 	"aiokafka>=0.10.0",
 	"motor>=3.6.0",
@@ -11,9 +11,8 @@ dependencies = [
 	"pydantic>=2.7.0",
 	"structlog>=24.1.0",
 	"orjson>=3.10.0",
-	"python-dotenv>=1.0.0"
-	,"selenium>=4.21.0"
-	,"webdriver-manager>=4.0.1"
+	"python-dotenv>=1.0.0",
+	"beautifulsoup4>=4.12.0"
 ]
 
 [build-system]
@@ -24,42 +23,18 @@ build-backend = "uv_build"
 # Placeholder for future uv-specific configuration (indexes, settings, etc.)
 
 [project.optional-dependencies]
+browser = [
+	"selenium>=4.21.0",
+	"webdriver-manager>=4.0.1",
+]
 dev = [
-		"ruff>=0.5.0",
+	"pytest>=8.2.0",
+	"pytest-asyncio>=0.23.0",
+	"coverage[toml]>=7.5.0",
+	"mypy>=1.10.0",
+]
+all = [
+	"quorabroker[browser,dev]",
 ]
 
-[tool.ruff]
-target-version = "py313"
-line-length = 100
-indent-width = 4
-respect-gitignore = true
-src = ["src", "."]
-
-[tool.ruff.lint]
-select = [
-	# Core
-	"E", "F", "I",  # pycodestyle, pyflakes, import sorting
-	# Best practices & correctness
-	"B",              # flake8-bugbear
-	"ASYNC",          # async issues
-	# Security (lightweight subset)
-	"S",              # bandit
-	# Performance
-	"PERF",
-	# Comprehensions
-	"C4",
-	# Pydantic
-	"Pydantic",
-]
-ignore = [
-	"E203",  # whitespace before : (Black compatibility if adopted later)
-	"E501",  # line length (handled by formatter; soft-limit still documented)
-]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-line-ending = "lf"
-docstring-code-format = true
-docstring-code-line-length = 100
+; Ruff configuration removed per user request
